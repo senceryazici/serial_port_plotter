@@ -1,4 +1,4 @@
-# Serial Port Plotter
+# TCP Socket Version of Serial Port Plotter
 
 This is a Windows application that displays real time data from serial port. The application is 32-bit and built with Qt and QCustomPlot library.
 
@@ -20,6 +20,20 @@ This is a Windows application that displays real time data from serial port. The
 
 ![Serial Port Plotter screenshot](res/screen_0.png)
 
+## Building the application
+Inside the directory, run
+
+```sh
+-$ qmake -makefile
+-$ make
+```
+
+To run the program, run 
+```sh
+-$ ./serial_port_plotter
+```
+
+
 ## How to use the application
 
 Just send your integer data over the serial port. The application expects certain format so it can differentiate between values. Each message you send must start with '$' and end with ';' (semi-colon) and the integers inside need to be space-separated. The Help button displays comprehensive instructions.
@@ -34,7 +48,7 @@ Double click on a channel in the Graph Control panel to hide/show a specific cha
 
 ![File Save Button](res/screen_1.png)
 
-## Send data over the serial port
+## Send data over the TCP Socket
 
 ```c
 /* Example: Plot two values */

@@ -27,9 +27,9 @@
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 
+#include <QtNetwork>
+#include <QTcpSocket>
 #include <QMainWindow>
-#include <QtSerialPort/QtSerialPort>
-#include <QSerialPortInfo>
 #include "helpwindow.hpp"
 #include "qcustomplot/qcustomplot.h"
 
@@ -56,7 +56,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_comboPort_currentIndexChanged(const QString &arg1);                           // Slot displays message on status bar
     void portOpenedSuccess();                                                             // Called when port opens OK
     void portOpenedFail();                                                                // Called when port fails to open
     void onPortClosed();                                                                  // Called when closing the port
@@ -65,7 +64,8 @@ private slots:
     void saveStream(QStringList newData);                                                 // Save the received data to the opened file
     void on_spinAxesMin_valueChanged(int arg1);                                           // Changing lower limit for the plot
     void on_spinAxesMax_valueChanged(int arg1);                                           // Changing upper limit for the plot
-    void readData();                                                                      // Slot for inside serial port
+    void readData();   
+    void newConnection();
     //void on_comboAxes_currentIndexChanged(int index);                                     // Display number of axes and colors in status bar
     void on_spinYStep_valueChanged(int arg1);                                             // Spin box for changing Y axis tick step
     void on_savePNGButton_clicked();                                                      // Button for saving JPG
@@ -134,7 +134,9 @@ private:
     QTimer updateTimer;                                                                   // Timer used for replotting the plot
     QTime timeOfFirstData;                                                                // Record the time of the first data point
     double timeBetweenSamples;                                                            // Store time between samples
-    QSerialPort *serialPort;                                                              // Serial port; runs in this thread
+    QTcpSocket *clientSocket;                                                              // Serial port; runs in this thread
+    QTcpServer *serverSocket;                                                              // Serial port; runs in this thread
+
     QString receivedData;                                                                 // Used for reading from the port
     int STATE;                                                                            // State of recieiving message from port
     int NUMBER_OF_POINTS;                                                                 // Number of points plotted
@@ -144,7 +146,7 @@ private:
     void enable_com_controls (bool enable);                                               // Enable/disable controls
     void setupPlot();                                                                     // Setup the QCustomPlot
                                                                                           // Open the inside serial port with these parameters
-    void openPort(QSerialPortInfo portInfo, int baudRate, QSerialPort::DataBits dataBits, QSerialPort::Parity parity, QSerialPort::StopBits stopBits);
+    void startSocketServer();
 };
 
 

@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp",
+        "bufferobject": "cpp",
+        "image": "cpp",
+        "mixinvector": "cpp",
+        "texture": "cpp",
+        "buffered_value": "cpp",
+        "fast_back_stack": "cpp",
+        "system_error": "cpp"
+    }
+}

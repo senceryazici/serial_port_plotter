@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT       += serialport
+# QT       += serialport
+QT       += network
 CONFIG += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
